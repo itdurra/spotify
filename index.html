@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<!--
+		Ian Durra
+		INFO 343
+		07/12/15
+		Spotify HW
+	-->
+	<head>
+		<script src="https://code.jquery.com/jquery.min.js"></script>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
+		<script src="app.js"></script>
+		<link href="app.css" rel="stylesheet" type="text/css" />
+		<meta charset="utf-8">
+		<title>JS Bin</title>
+	</head>
+	<body>
+		<h1>Guessing Game</h1>
+		<h5>Hint: Tooltips are your friend!</h5>
+		<div ng-app="myApp" ng-controller="myCtrl">
+			<h3 ng-model="answer">{{answer}}</h3>
+			<div id="divider">
+				<div class="row">
+					<!--Responsive Form-->
+					<div id="form" ng-show="!tracks.length">
+						<form name="songForm">
+							<div class="form-group">
+								<label>Favorite Animal:</label>
+								<input name="a" ng-pattern="/^[a-zA-Z]{2,5}$/" placeholder="Must be between 2 and 5 characters" ng-model="a" class="form-control" required></input>
+								<p class="help-block" ng-show="songForm.a.$error.pattern">Please enter between 2 - 5 characters</p>
+								<label>Favorite Year:</label>
+								<input name="y" ng-pattern="/^[1-9][0-9]{3}$/" placeholder="Enter a year ex: 1978" ng-model="r" class="form-control" required></input>
+								<p class="help-block" ng-show="songForm.y.$error.pattern">Please enter only 4 numbers (no leading 0's)</p>
+								<label>Difficulty:</label>
+								<select name="diff" ng-model="d" required>
+									<option value="{{level}}" ng-repeat="level in diff">{{level}}</option>
+								</select><br/>
+								<label>Number of Guesses:</label>
+								<input name="t" ng-pattern="/^([1-9]|[1-9][0-9]{1,8})$/" placeholder="Enter 2 - 9 digits" ng-model="h" class="form-control" required></input>
+								<p class="help-block" ng-show="songForm.t.$error.pattern">Please enter only 2 - 9 digits (no leading 0's)</p>
+							</div>
+							<div class="form-group">
+								<button ng-disabled="isDisabled(songForm.a.$invalid, songForm.y.$invalid, songForm.t.$invalid)" class="btn btn-primary" ng-click="getSongs()" type="submit">Submit</button>
+							</div>
+						</form>
+					</div>
+					<!--Game Controls-->
+					<div id="controls" ng-show="tracks.length>0">
+						<div class="controls">
+							<button class="btn btn-primary" ng-click="begin()" type="submit">New Game</button>
+							<button class="btn btn-primary" ng-click="newQuery()" type="submit">New Query</button>
+							<button class="btn btn-primary" ng-click="killSong()" type="submit">Pause Song</button>
+							<button class="btn btn-primary" ng-click="resetAll()" type="submit">Reset Stats</button>
+							Guesses: <input type="text" ng-model="t"><br/>
+							Win: <input type="text" ng-model="w"><br/>
+							Loss: <input type="text" ng-model="l"><br/>
+							Games: <input type="text" ng-model="g"><br/>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--Display Tracks-->
+			<div class="container-fixed">
+				<div ng-show="!name" class="controls">
+					<h1>No Results Yet...</h1>
+				</div>
+				<div ng-class="track.preview_url == currentSong ? 'playing' : ''"  ng-repeat="track in tracks" class="col-xs-4 img">
+					<img ng-click="play(track.preview_url)" title="{{track.name}}" src="{{track.album.images[1].url}}" alt="{{track.name}}"></img>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

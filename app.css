@@ -1,0 +1,69 @@
+/*
+Ian Durra
+INFO 343
+07/12/15
+Spotify HW
+*/
+body {
+    padding:10px;
+}
+.img {
+    margin-bottom:20px;
+    border:1px solid #d3d3d3;
+    padding:10px; 
+    text-align:center;
+    box-sizing:border-box;
+}
+img {
+    max-height:100%;
+    max-width:100%;
+    cursor:pointer;
+}
+.container-fixed {
+    clear: both;
+    width:90%;
+    margin-left:5%;
+    text-align:center;
+}
+.playing {
+    border:5px solid lightblue;
+}
+#divider {
+    height:400px;
+}
+body *{
+    padding: 10px;
+}
+* {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+h1, h3, h5{
+    text-align: center;
+}
+h3{
+    color: red;
+}
+#form{
+    border: 1px solid gray !important;
+}
+#controls{
+    text-align: right;
+    height: auto;
+    border: 1px solid gray !important;
+}
+#controls button{
+    float: left;
+    clear: left;
+    margin-top: 10px;
+}
+#controls, #form{
+    height: auto;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto
+}
+#controls input{
+    text-align: right;
+}
